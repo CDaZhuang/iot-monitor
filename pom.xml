@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.cdaz</groupId>
+  <artifactId>iot-monitor</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Maven</name>
+  <url>http://maven.apache.org/</url>
+  <inceptionYear>2001</inceptionYear>
+  <modules>
+    <module>mq</module>
+      <module>rule</module>
+      <module>monitor</module>
+    <module>alarm</module>
+      <module>representation</module>
+    <module>rule/rule-api</module>
+    <module>rule/rule-provider</module>
+    <module>monitor/monitor-api</module>
+    <module>monitor/monitor-provider</module>
+      <module>test</module>
+  </modules>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.source-version>1.8</java.source-version>
+    <java.target-version>1.8</java.target-version>
+    <spring.cloud-version>Hoxton.SR12</spring.cloud-version>
+    <spring.cloud.alibaba-version>2.2.9.RELEASE</spring.cloud.alibaba-version>
+    <spring.boot-version>2.2.8.RELEASE</spring.boot-version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>2.2.9.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>${spring.boot-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3 -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <!-- 源代码使用的JDK版本 -->
+          <source>${java.source-version}</source>
+          <!-- 需要生成的目标class文件的编译版本 -->
+          <target>${java.target-version}</target>
+          <!-- 字符集编码 -->
+          <encoding>UTF-8</encoding>
+          <!-- 跳过测试 -->
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

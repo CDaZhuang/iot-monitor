@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cdaz.rule.provider.dao.RuleDao">
+    <resultMap id="ruleMap" type="org.cdaz.rule.api.entity.Rule">
+        <result column="rule_id" property="ruleId"/>
+        <result column="rule_namespace" property="namespace"/>
+        <result column="rule_group" property="group"/>
+        <result column="name" property="name"/>
+        <result column="client_id" property="clientId"/>
+        <result column="prop" property="prop"/>
+        <result column="rule_exp" property="ruleExp"/>
+        <result column="is_counting_rule" property="countingRule"/>
+        <result column="err_count" property="count"/>
+        <result column="time_window" property="timeWindow"/>
+    </resultMap>
+
+    <select id="findRuleByClientId" resultType="org.cdaz.rule.api.entity.Rule" resultMap="ruleMap">
+        SELECT * FROM Rule
+        WHERE client_id = #{clientId}
+    </select>
+
+    <select id="findRuleByClientIdAndProp" resultType="org.cdaz.rule.api.entity.Rule" resultMap="ruleMap">
+        SELECT * FROM Rule
+        WHERE client_id = #{clientId}
+            AND prop = #{prop}
+    </select>
+    
+    <insert id="createRule">
+        INSERT INTO Rule(rule_id, rule_namespace, rule_group, name, client_id, prop, rule_exp, is_counting_rule, err_count, time_window)
+        VALUES(null, #{namespace}, #{group}, #{name}, #{clientId}, #{prop}, #{ruleExp}, #{countingRule}, #{count}, #{timeWindow})
+    </insert>
+
+    <delete id="deleteRuleByClientIdAndProp">
+        DELETE FROM Rule
+        WHERE client_id = #{clientId}
+            AND prop = #{prop}
+    </delete>
+</mapper>
